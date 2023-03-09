@@ -14,6 +14,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,32 +42,42 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    LazyColumn{
-                        items(todos.value){
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp)
-                                    .background(Color.White)
-                            ) {
-                                Text(
-                                    text = it.title,
-                                    style = MaterialTheme.typography.h5,
-                                    fontSize = 16.sp
-                                )
-                                Text(
-                                    text = it.completed.toString(),
-                                    style = MaterialTheme.typography.h5,
-                                    fontSize = 16.sp
-                                )
-                                Divider(
-                                    color = Color.Black,
-                                    thickness = 1.dp
-                                )
+                    Responses(todos)
+                }
+            }
+        }
+    }
 
-                            }
-                        }
-                    }
+    @Composable
+    private fun Responses(todos: State<List<TodosResponse>>) {
+        LazyColumn {
+            items(todos.value) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .background(Color.White)
+                ) {
+                    Text(
+                        text = "User Id :${it.id}",
+                        style = MaterialTheme.typography.h6,
+                        fontSize = 18.sp
+                    )
+                    Text(
+                        text = "Title :${it.title}",
+                        style = MaterialTheme.typography.h3,
+                        fontSize = 16.sp
+                    )
+                    Text(
+                        text = "Completed Status :${it.completed.toString() }",
+                        style = MaterialTheme.typography.h4,
+                        fontSize = 16.sp
+                    )
+                    Divider(
+                        color = Color.Black,
+                        thickness = 1.dp
+                    )
+
                 }
             }
         }
