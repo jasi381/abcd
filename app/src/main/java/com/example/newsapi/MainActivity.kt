@@ -1,6 +1,7 @@
 package com.example.newsapi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun Responses(todos: State<List<TodosResponse>>) {
+        Log.d("hell", "${todos.value} ")
         LazyColumn {
             items(todos.value) {
                 Column(
